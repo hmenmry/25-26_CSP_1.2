@@ -4,15 +4,15 @@ import turtle as trtl
 #Make a turtle
 james = trtl.Turtle()
 
-def drawsquare():
+def drawsquare(length):
     for sides in range(4):
-        james.forward(30)
+        james.forward(length)
         james.right(90)
 
 
-drawsquare()
+drawsquare(61)
 james.forward(60)
-drawsquare()
+drawsquare(47)
 
 wn = trtl.Screen()
 wn.mainloop()
