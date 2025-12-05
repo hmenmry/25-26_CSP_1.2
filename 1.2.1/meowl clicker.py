@@ -1,29 +1,84 @@
-#imports
+#-----import statements-----
 import turtle as trtl
 import random as rand
+
+#-----game configuration----
+score = 0
+font_setup = ("Papyrus", 20, "normal")
 wn = trtl.Screen()
-wn.registershape("noFilter.gif")
-#game configurations
-spot_color = ("purple")
+wn.register_shape("meowl.gif")
+#-----initialize turtle-----
 
+# Score turtle
+score_writer = trtl.Turtle()
+score_writer.penup()
+score_writer.hideturtle()
+# Box turtle
+box_turtle = trtl.Turtle()
+box_turtle.penup()
+box_turtle.hideturtle()
 
-#initialize turtle
+# Shape turtle
 meowl = trtl.Turtle()
-meowl.shape("noFilter.gif")
-meowl.color(spot_color)
-meowl.shapesize(3)
+meowl.shape("meowl.gif")
 meowl.penup()
 
+#-----game functions--------
+# Draw the box for the score
+def scoreBox():
+    # Set up the starting location and pendown
+    box_turtle.goto(275, 325)
+    box_turtle.pendown()
 
-#game functions
-#get a score boost and move trtl
+    # Draw the box
+    for sides in range(2):
+        box_turtle.forward(100)
+        box_turtle.left(90)
+        box_turtle.forward(50)
+        box_turtle.left(90)
 
-def spot_clicked(x,y):
-    print("meowl was clicked")
+    # Place score_writer where it will write the score
+    score_writer.penup()
+    score_writer.goto(300, 325)
 
+# Get a score boost, move the turtle randomly
+def spot_clicked(x, y):
+    change_position()
 
+def change_position():
+    # Move the turtle to a random location
+    newX = rand.randint(-300, 300)
+    newY = rand.randint(-300, 300)
+    meowl.goto(newX, newY)
+    update_score()
 
+def update_score():
+    # Include the global score
+    global score
+    # Increment the score by 1
+    score += 1
+    # Clear prior score
+    score_writer.clear()
+    # print the score
+    score_writer.write(score, font=font_setup)
+
+#-----events----------------
+meowl.onclick(spot_clicked)
+
+scoreBox()
 wn.mainloop()
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
